@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Добавить автомобиль</title>
+  <style>
+    /* Общие стили */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    h1 {
+      color: #333;
+      text-align: center;
+    }
+
+    /* Стили для формы */
+    form {
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    form div {
+      margin-bottom: 15px;
+    }
+
+    form label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    form input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
+    /* Стили для кнопок */
+    .button-container {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .button-container button,
+    .button-container a {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      text-decoration: none;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background-color 0.3s ease;
+    }
+
+    .button-container button {
+      background-color: #28a745;
+    }
+
+    .button-container button:hover {
+      background-color: #218838;
+    }
+
+    .button-container a {
+      background-color: #007bff;
+    }
+
+    .button-container a:hover {
+      background-color: #0056b3;
+    }
+
+    /* Стили для ошибок */
+    .error-message {
+      color: red;
+      text-align: center;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+<h1>Добавить автомобиль</h1>
+<form th:action="@{/cars/add}" th:object="${car}" method="post">
+  <div>
+    <label>Марка:</label>
+    <input type="text" th:field="*{make}" required>
+  </div>
+  <div>
+    <label>Модель:</label>
+    <input type="text" th:field="*{model}" required>
+  </div>
+  <div>
+    <label>Год выпуска:</label>
+    <input type="number" th:field="*{year}" required>
+  </div>
+  <div>
+    <label>Цена:</label>
+    <input type="number" th:field="*{price}" required>
+  </div>
+  <div class="button-container">
+    <button type="submit">Сохранить</button>
+    <a th:href="@{/cars}">Назад к списку</a>
+  </div>
+  <div th:if="${error}" class="error-message">
+    <p th:text="${error}"></p>
+  </div>
+</form>
+</body>
+</html>
